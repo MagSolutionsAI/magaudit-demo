@@ -1,0 +1,12 @@
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+jobs:
+  comentar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
